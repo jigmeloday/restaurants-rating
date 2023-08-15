@@ -7,6 +7,7 @@ import Input from '../../shared/component/input/input.component';
 import Button from '../../shared/component/button/button.component';
 import { useDispatch } from 'react-redux';
 import { userLogin } from './services/auth.slice';
+import { LOGIN_SCHEMA } from './schema/auth.schema';
 
 function Login() {
     const dispatch = useDispatch();
@@ -20,11 +21,20 @@ function Login() {
                      </Box>
                      <Formik
                          initialValues={{ email: '', password: ''}}
+                         validationSchema={LOGIN_SCHEMA}
                          onSubmit={(values: FormikValues) => dispatch(userLogin(values as any) as any)}>
-                         {({handleChange, handleBlur, handleSubmit, values}) => (
+                         {({handleChange, touched, errors, handleBlur, handleSubmit, values}) => (
                              <Grid item container gap='24px'>
-                                 <Input name='email' value={values.email} label='Email' onChange={handleChange} />
-                                 <Input name='password' value={values.password} label='Password' onChange={handleChange} />
+                                 <Input
+                                     helperText={(touched.email &&
+                                         errors.email &&
+                                         errors.email) as string }
+                                     name='email' type='email' value={values.email} label='Email' onChange={handleChange} />
+                                 <Input
+                                     helperText={(touched.password &&
+                                         errors.password &&
+                                         errors.password) as string }
+                                     name='password' type='password' value={values.password} label='Password' onChange={handleChange} />
                                  <Button click={handleSubmit} variant='contained' label='Login' className='width--full' />
                              </Grid>
                          )}
