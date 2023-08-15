@@ -18,7 +18,7 @@ function CoreRoutes() {
             <Routes>
                 {
                     user ? AUTHENTICATED_ROUTE.map(({ element, path}) =>
-                            (  <Route path={path} element={element} />)) :
+                            (  <Route path={path} element={element} key={path} />)) :
                         <Route path='' element={<Login />} />
                 }
             </Routes>
