@@ -5,10 +5,12 @@ import { CombinedState, Reducer } from 'redux';
 import { AUTH_KEY, authReducer, InitialAuthState } from '../pages/auth/services/auth.slice';
 import { PersistPartial } from 'redux-persist/lib/persistReducer';
 import storage from 'redux-persist/lib/storage';
+import { InitialLandingState, LANDING_KEY, landingReducer } from '../pages/landing/services/landing.slice';
 
 
 export interface IReducer {
     [AUTH_KEY]: InitialAuthState;
+    [LANDING_KEY]: InitialLandingState
 }
 
 const persistConfig: PersistConfig<IReducer> = {
@@ -18,6 +20,7 @@ const persistConfig: PersistConfig<IReducer> = {
 };
 const reducers: Reducer<CombinedState<IReducer>> = combineReducers({
     [AUTH_KEY]: authReducer,
+    [LANDING_KEY]: landingReducer
 });
 /*
 TODO need to configure
