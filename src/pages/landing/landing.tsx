@@ -17,9 +17,9 @@ function Landing() {
         <Grid container item padding='34px' >
             <Grid item container direction='row' gap='22px'>
                 {
-                    cafe.map((item:{ id: string, name: string }, index: number) => (
-                        <Box>
-                            <CafeList item={item} key={index} />
+                    cafe.map((item:{ id: string, name: string }) => (
+                        <Box key={item.id}>
+                            <CafeList item={item} />
                         </Box>
                     ))
                 }

@@ -10,7 +10,7 @@ export const GetCafe = async () => {
         querySnapshot.forEach((doc) => {
             cafeList.push({
                 id: doc.id,
-                data: doc.data()
+                ...doc.data()
             })
         });
         return cafeList;
