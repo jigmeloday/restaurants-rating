@@ -8,8 +8,23 @@
     cursor: pointer;
 }
 
+.object-fit--cover {
+    object-fit: cover;
+}
+
+.object-fit--contain {
+    object-fit: contain;
+}
+
 .width--full {
     width: 100%;
+}
+.border-radius--50 {
+    border-radius: 50%;
+}
+
+.border-radius--8 {
+    border-radius: 8px;
 }
 
 .width--inherit {
