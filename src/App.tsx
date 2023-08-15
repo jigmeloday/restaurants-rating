@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import { Button } from '@mui/material';
+import CoreRoutes from './core/route';
 
 function App() {
   return (
-    <div className="App">
-        <Button >hello</Button>
-    </div>
+   <div>
+       <CoreRoutes />
+   </div>
   );
 }
 
