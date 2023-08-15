@@ -1,0 +1,45 @@
+.position--relative {
+    position: relative;
+}
+.position--absolute {
+    position: absolute;
+}
+.cursor--pointer {
+    cursor: pointer;
+}
+
+.width--full {
+    width: 100%;
+}
+
+.width--inherit {
+    width: inherit;
+}
+
+.width--fit-content {
+    width: fit-content;
+}
+
+.width--auto {
+    width: auto;
+}
+
+.width--vw {
+    width: 100vw;
+}
+.height--fit-content {
+    height: fit-content;
+}
+.text--decoration-none {
+    text-decoration: none;
+}
+
+.font--20 {
+    font-size: 20px;
+}
+
+
+
+
+
+
