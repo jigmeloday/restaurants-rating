@@ -1,11 +1,15 @@
 import React from 'react';
 import './App.css';
 import CoreRoutes from './core/route';
+import { Provider } from 'react-redux';
+import { store } from './store/redux.store';
 
 function App() {
   return (
    <div>
-       <CoreRoutes />
+     <Provider store={store}>
+         <CoreRoutes />
+     </Provider>
    </div>
   );
 }
