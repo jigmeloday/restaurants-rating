@@ -10,7 +10,11 @@ export const HEADER_NAV: NavModel[] = [
         path: ''
     },
     {
-        label: 'Collections',
+        label: 'collections',
         path: ''
-    }
+    },
+    {
+        label: 'Photos',
+        path: ''
+    },
 ]

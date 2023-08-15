@@ -34,7 +34,7 @@ function Header() {
                     </Grid>
 
                     <Grid item container xs={ 6 } direction='row' alignItems='center' justifyContent='end'>
-                        <Grid item container xs={ 6 }>
+                        <Grid item container xs={ 8 }>
                             {
                                 HEADER_NAV.map(({ label, path }) => (
                                     <Box mx='12px' key={label} className='cursor--pointer border-radius--8'>
