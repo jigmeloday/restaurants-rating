@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit';
 import { GetProfile } from './profile.api';
+import { setProfile } from './profile.action';
 
 
 export const PROFILE_KEY = 'profile';
@@ -33,6 +34,9 @@ export const profileSlice = createSlice({
             .addCase(getProfile.fulfilled, (state: InitialProfileState, action) => {
                 state.user = action.payload;
             })
+            .addCase(setProfile, (state, action) => {
+                state.user = action.payload
+            });
     }
 });
 

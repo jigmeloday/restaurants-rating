@@ -8,10 +8,13 @@ import Search from '../search/search';
 import React, { useState } from 'react';
 import MenuComponent from './components/menu.component';
 import Button from '../../shared/component/button/button.component';
+import { useSelector } from 'react-redux';
+import { selectProfile } from '../../pages/profile/services/profile.slice';
 
 function Header() {
     const [searchVal, setSearchVal] = useState<string>('');
     const active = useLocation().pathname;
+    const profile = useSelector(selectProfile);
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -48,7 +51,7 @@ function Header() {
                         </Grid>
                         <Grid item container xs={ 3 } justifyContent='end'>
                             <ProfileHolder onClick={handleClick as any}>
-                                <img src='https://images.unsplash.com/photo-1541298645675-6cc8e127934d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1674&q=80'
+                                <img src={profile?.profileUrl}
                                      className='object-fit--cover border-radius--50' width='100%' height='100%'/>
                             </ProfileHolder>
                             <MenuComponent anchorEl={anchorEl} handleClose={handleClose} open={open} />

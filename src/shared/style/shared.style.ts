@@ -23,4 +23,5 @@ export const ProfilePicHolder = styled( Box )(
   position: absolute;
   top: 142px;
   left: 20px;
+  background-color: white;
 ` );

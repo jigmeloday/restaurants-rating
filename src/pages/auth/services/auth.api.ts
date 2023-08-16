@@ -29,7 +29,8 @@ export const signUp = async ( payload: { email:string, password:string }) => {
                firstName: '',
                lastName: '',
                share_with: '',
-               profileUrl: ''
+               profileUrl: '',
+               hobbies: []
            });
        }
        return user.user;
