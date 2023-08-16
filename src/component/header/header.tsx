@@ -27,7 +27,7 @@ function Header() {
             <HeaderContainer>
                 <Grid item container direction='row' alignItems='center'>
                     <Grid item container xs={ 3 }>
-                        Logo
+                        DiaryDine
                     </Grid>
                     <Grid item container xs={ 3 }>
                         <Search name='search' handleChange={handleSearch} placeholder='search' value={searchVal} />
