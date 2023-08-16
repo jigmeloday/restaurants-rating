@@ -15,7 +15,10 @@ function Landing() {
 
     return(
         <Grid container item padding='34px' >
-            <Grid item container direction='row' gap='22px'>
+            <Grid item container>
+                <Button label='Create List' variant='contained'/>
+            </Grid>
+            <Grid item container direction='row' gap='22px' my='24px'>
                 {
                     cafe.map((item:{ id: string, name: string }) => (
                         <Box key={item.id}>

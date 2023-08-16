@@ -1,6 +1,10 @@
-import { Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { CafeListCard } from './style/cafe-list.style';
 import Typography from '../typography/typography';
+import Icon from '../icon/icon';
+import { theme } from '../../../assets/theme/theme';
+import Button from '../button/button.component';
+import React from 'react';
 
 function CafeList(props: any) {
     return (
@@ -11,8 +15,22 @@ function CafeList(props: any) {
                 </Grid>
                 <Grid item container direction='column' pt='4px'>
                     <Typography label={`Place: ${props.item.name}`} variant='caption' />
-                    <Typography label={`Rating: ${props.item.rating}/5`} variant='caption' />
-                    <Typography label={`Feedback: ${props.item.feedback.slice(0, 20)}...`} variant='caption' />
+                    <Grid item container direction='row' justifyContent='space-between'>
+                        <Grid item container xs={6}>
+                            <Typography label={`Rating: ${props.item.rating || 0}/5`} variant='caption' />
+                        </Grid>
+                        <Grid item container xs={6} justifyContent='end'>
+                            {
+                                props.item.visited ?  <Icon iconName='tour' color={theme.palette.primary.main}/> : null
+                            }
+                            <Box pl='12px' className='cursor--pointer'>
+                                <Icon iconName='favorite_outlined' color={theme.palette.primary.main}  />
+                            </Box>
+                        </Grid>
+                    </Grid>
+                    <Grid item container mt='12px' xs={12}>
+                        <Button variant='outlined'  label='Visit' className='width--full'/>
+                    </Grid>
                 </Grid>
             </CafeListCard>
         </Grid>
