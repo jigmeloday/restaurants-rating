@@ -53,8 +53,9 @@
     font-size: 20px;
 }
 
-
-
-
+.link--style {
+    text-decoration: none;
+    color: #282c34;
+}
 
 
