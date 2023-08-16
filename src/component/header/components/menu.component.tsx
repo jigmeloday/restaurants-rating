@@ -3,12 +3,18 @@ import React from 'react';
 import { MenuComponentProps } from '../model/header.model';
 import { useDispatch } from 'react-redux';
 import { userLogOut } from '../../../pages/auth/services/auth.slice';
+import { useNavigate } from 'react-router-dom';
 
 function MenuComponent(props: MenuComponentProps) {
     const dispatch = useDispatch();
+    const route = useNavigate();
+    const navigate = (link: string) => {
+        route(link);
+        props.handleClose();
+    }
     const onLogOut = () => {
         dispatch(userLogOut() as keyof unknown);
-        props.handleClose()
+        props.handleClose();
     }
     return(
         <Menu
@@ -20,7 +26,7 @@ function MenuComponent(props: MenuComponentProps) {
                 'aria-labelledby': 'basic-button',
             }}
         >
-            <MenuItem onClick={props.handleClose}>Profile</MenuItem>
+            <MenuItem onClick={() => navigate('/profile')}>Profile</MenuItem>
             <MenuItem onClick={props.handleClose}>My account</MenuItem>
             <MenuItem onClick={onLogOut}>Logout</MenuItem>
         </Menu>
