@@ -1,6 +1,6 @@
 import { Formik, FormikValues } from "formik"
-import { SIGN_UP_SCHEMA } from '../schema/auth.schema';
-import { userLogin } from '../services/auth.slice';
+import { LOGIN_SCHEMA } from '../schema/auth.schema';
+import { userLogin, userSignUp } from '../services/auth.slice';
 import { Grid } from '@mui/material';
 import Input from '../../../shared/component/input/input.component';
 import Button from '../../../shared/component/button/button.component';
@@ -14,8 +14,8 @@ function Registration() {
     return(
         <Formik
             initialValues={{ email: '', password: ''}}
-            validationSchema={SIGN_UP_SCHEMA}
-            onSubmit={(values: FormikValues) => dispatch(userLogin(values as any) as any)}>
+            validationSchema={LOGIN_SCHEMA}
+            onSubmit={(values: FormikValues) => dispatch(userSignUp(values as any) as any)}>
             {({handleChange, touched, errors, handleBlur, handleSubmit, values}) => (
                 <Grid item container gap='24px'>
                     <Input

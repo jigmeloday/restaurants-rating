@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit';
-import { Login, LogOut } from './auth.api';
+import { Login, LogOut, signUp } from './auth.api';
 
 
 export const AUTH_KEY = 'auth';
@@ -27,6 +27,14 @@ export const userLogOut =  createAsyncThunk(
         return await LogOut();
     }
 );
+
+export const userSignUp = createAsyncThunk(
+    'auth/userSignUp',
+    async(payload: { email:string, password:string }, thunkAPI) =>{
+        return await signUp(payload);
+    }
+);
+
 export const authSlice = createSlice({
     name: 'user',
     initialState: INITIAL_AUTH_STATE,
@@ -38,6 +46,9 @@ export const authSlice = createSlice({
             })
             .addCase(userLogOut.fulfilled, (state, action) => {
                 state.user = undefined;
+            })
+            .addCase(userSignUp.fulfilled, ( state: InitialAuthState, action ) => {
+                state.user = action.payload
             });
     }
 });
