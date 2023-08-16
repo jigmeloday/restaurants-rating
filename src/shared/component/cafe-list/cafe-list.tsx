@@ -1,6 +1,7 @@
-import { Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { CafeListCard } from './style/cafe-list.style';
 import Typography from '../typography/typography';
+import Icon from '../icon/icon';
 
 function CafeList(props: any) {
     return (
@@ -11,8 +12,14 @@ function CafeList(props: any) {
                 </Grid>
                 <Grid item container direction='column' pt='4px'>
                     <Typography label={`Place: ${props.item.name}`} variant='caption' />
-                    <Typography label={`Rating: ${props.item.rating}/5`} variant='caption' />
-                    <Typography label={`Feedback: ${props.item.feedback.slice(0, 20)}...`} variant='caption' />
+                    <Grid item container direction='row' justifyContent='space-between'>
+                       <Box>
+                           <Typography label={`Rating: ${props.item.rating}/5`} variant='caption' />
+                       </Box>
+                        <Box className='cursor--pointer'>
+                            <Icon iconName='favorite_outlined'   />
+                        </Box>
+                    </Grid>
                 </Grid>
             </CafeListCard>
         </Grid>
