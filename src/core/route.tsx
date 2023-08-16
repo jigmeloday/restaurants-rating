@@ -1,5 +1,5 @@
-import { Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Suspense, useEffect } from "react";
+import { Route, Routes, useLocation, useNavigate, useRoutes } from "react-router-dom";
 import Landing from '../pages/landing/landing';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../pages/auth/services/auth.slice';
@@ -8,6 +8,8 @@ import Auth from '../pages/auth/auth';
 
 function CoreRoutes() {
     const user = useSelector(selectUser);
+    const path = useLocation().pathname;
+    const router = useNavigate();
     const AUTHENTICATED_ROUTE = [
         {
             element: <Landing />,
@@ -24,7 +26,12 @@ function CoreRoutes() {
             element: <>photo</>,
             path: '/photos'
         }
-    ]
+    ];
+    useEffect(() => {
+       if ( user && path === '/signup' ) {
+           router('/')
+       }
+    }, [user]);
     return(
         <Suspense fallback={ null }>
             {

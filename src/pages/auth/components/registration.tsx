@@ -1,6 +1,6 @@
 import { Formik, FormikValues } from "formik"
 import { LOGIN_SCHEMA } from '../schema/auth.schema';
-import { userLogin, userSignUp } from '../services/auth.slice';
+import { userSignUp } from '../services/auth.slice';
 import { Grid } from '@mui/material';
 import Input from '../../../shared/component/input/input.component';
 import Button from '../../../shared/component/button/button.component';
