@@ -19,11 +19,13 @@ function Registration() {
             {({handleChange, touched, errors, handleBlur, handleSubmit, values}) => (
                 <Grid item container gap='24px'>
                     <Input
+                        onBlur={handleBlur}
                         helperText={(touched.email &&
                             errors.email &&
                             errors.email) as string }
                         name='email' type='email' value={values.email} label='Email' onChange={handleChange} />
                     <Input
+                        onBlur={handleBlur}
                         helperText={(touched.password &&
                             errors.password &&
                             errors.password) as string }
