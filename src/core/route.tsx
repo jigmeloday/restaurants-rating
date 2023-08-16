@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { selectUser } from '../pages/auth/services/auth.slice';
 import Header from '../component/header/header';
 import Auth from '../pages/auth/auth';
+import Profile from '../pages/profile/profile';
 
 function CoreRoutes() {
     const user = useSelector(selectUser);
@@ -25,6 +26,10 @@ function CoreRoutes() {
         },{
             element: <>photo</>,
             path: '/photos'
+        },
+        {
+            element: <Profile />,
+            path: '/profile'
         }
     ];
     useEffect(() => {
