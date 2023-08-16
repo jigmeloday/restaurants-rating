@@ -38,7 +38,7 @@ function Header() {
                             {
                                 HEADER_NAV.map(({ label, path }) => (
                                     <Box mx='12px' key={label} className='cursor--pointer border-radius--8'>
-                                        <Link to={path}>
+                                        <Link to={path} className='link--style'>
                                             <Typography label={label.toUpperCase()} variant='body1' color={active === path ? theme.palette.primary.main: ''}  />
                                         </Link>
                                     </Box>
