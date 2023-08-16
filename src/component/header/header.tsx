@@ -1,8 +1,8 @@
-import { Box, Grid, Menu, MenuItem } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { HeaderContainer, ProfileHolder } from './style/header.style';
 import { HEADER_NAV } from './constant/header.constant';
 import Typography from '../../shared/component/typography/typography';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { theme } from '../../assets/theme/theme';
 import Search from '../search/search';
 import React, { useState } from 'react';
@@ -38,7 +38,9 @@ function Header() {
                             {
                                 HEADER_NAV.map(({ label, path }) => (
                                     <Box mx='12px' key={label} className='cursor--pointer border-radius--8'>
-                                        <Typography label={label.toUpperCase()} variant='body1' color={active === path ? theme.palette.primary.main: ''}  />
+                                        <Link to={path}>
+                                            <Typography label={label.toUpperCase()} variant='body1' color={active === path ? theme.palette.primary.main: ''}  />
+                                        </Link>
                                     </Box>
                                 ))
                             }

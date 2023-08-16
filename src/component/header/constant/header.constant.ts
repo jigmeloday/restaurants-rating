@@ -7,14 +7,14 @@ export const HEADER_NAV: NavModel[] = [
     },
     {
         label: 'Visited',
-        path: ''
+        path: '/visited'
     },
     {
         label: 'collections',
-        path: ''
+        path: '/collections'
     },
     {
         label: 'Photos',
-        path: ''
+        path: '/photos'
     },
 ]

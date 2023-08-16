@@ -12,6 +12,17 @@ function CoreRoutes() {
         {
             element: <Landing />,
             path: '/'
+        },
+        {
+            element: <>Visited</>,
+            path: '/visited'
+        },
+        {
+            element: <>collection</>,
+            path: '/collections'
+        },{
+            element: <>photo</>,
+            path: '/photos'
         }
     ]
     return(
