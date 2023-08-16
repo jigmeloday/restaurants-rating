@@ -23,7 +23,7 @@ export const signUp = async ( payload: { email:string, password:string }) => {
     try {
        const user = await createUserWithEmailAndPassword (auth, payload.email, payload.password);
        if ( user ) {
-          return  await addDoc(collection(db, 'user'), {
+            await addDoc(collection(db, 'user'), {
                email: payload.email,
                userName: '',
                firstName: '',
@@ -32,7 +32,7 @@ export const signUp = async ( payload: { email:string, password:string }) => {
                profileUrl: ''
            });
        }
-       return user
+       return user.user;
     } catch ( error ) {
         return error
     }
