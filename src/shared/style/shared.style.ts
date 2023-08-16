@@ -15,12 +15,12 @@ export const CustomSearch = styled( TextField )(
 ` );
 
 export const ProfilePicHolder = styled( Box )(
-    ( {} ) => `
+    ( {theme} ) => `
   height: 100px;
   width: 100px;
   border: 1px solid black;
   border-radius: 50%;
   position: absolute;
-  top: 140px;
+  top: 142px;
   left: 20px;
 ` );
