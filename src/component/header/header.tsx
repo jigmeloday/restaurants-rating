@@ -7,6 +7,7 @@ import { theme } from '../../assets/theme/theme';
 import Search from '../search/search';
 import React, { useState } from 'react';
 import MenuComponent from './components/menu.component';
+import Button from '../../shared/component/button/button.component';
 
 function Header() {
     const [searchVal, setSearchVal] = useState<string>('');
