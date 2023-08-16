@@ -1,10 +1,10 @@
 import { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import Login from '../pages/auth/login';
 import Landing from '../pages/landing/landing';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../pages/auth/services/auth.slice';
 import Header from '../component/header/header';
+import Auth from '../pages/auth/auth';
 
 function CoreRoutes() {
     const user = useSelector(selectUser);
@@ -34,7 +34,7 @@ function CoreRoutes() {
                 {
                     user ? AUTHENTICATED_ROUTE.map(({ element, path}) =>
                             (  <Route path={path} element={element} key={path} />)) :
-                        <Route path='' element={<Login />} />
+                        <Route path='/*' element={<Auth />} />
                 }
             </Routes>
         </Suspense>
