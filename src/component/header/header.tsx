@@ -10,6 +10,7 @@ import MenuComponent from './components/menu.component';
 import Button from '../../shared/component/button/button.component';
 import { useSelector } from 'react-redux';
 import { selectProfile } from '../../pages/profile/services/profile.slice';
+import { DEFAULT_IMG } from '../../shared/constant/shared.constant';
 
 function Header() {
     const [searchVal, setSearchVal] = useState<string>('');
@@ -51,7 +52,7 @@ function Header() {
                         </Grid>
                         <Grid item container xs={ 3 } justifyContent='end'>
                             <ProfileHolder onClick={handleClick as any}>
-                                <img src={profile?.profileUrl}
+                                <img src={profile?.profileUrl || DEFAULT_IMG}
                                      className='object-fit--cover border-radius--50' width='100%' height='100%'/>
                             </ProfileHolder>
                             <MenuComponent anchorEl={anchorEl} handleClose={handleClose} open={open} />

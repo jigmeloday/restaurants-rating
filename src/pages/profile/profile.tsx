@@ -9,12 +9,13 @@ import { useEffect, useRef, useState } from 'react';
 import Icon from '../../shared/component/icon/icon';
 import { UploadProfile } from './services/profile.api';
 import { setProfile } from './services/profile.action';
+import { DEFAULT_IMG } from '../../shared/constant/shared.constant';
 
 function Profile() {
     const user = useSelector(selectUser);
     const profile = useSelector(selectProfile);
     const dispatch = useDispatch();
-    const [pic, setPic] = useState( 'https://images.unsplash.com/photo-1541298645675-6cc8e127934d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1674&q=80');
+    const [pic, setPic] = useState<string>(profile?.profileUrl || DEFAULT_IMG);
     useEffect(() => {
         !profile && dispatch(getProfile(user?.email) as keyof unknown)
         profile?.profileUrl && setPic(profile?.profileUrl)
@@ -41,7 +42,7 @@ function Profile() {
             <Grid item container className='position--relative' boxShadow={`${theme.palette.primary.dark} 0px 1px 4px;`} sx={{ borderTopRightRadius: '12px', borderTopLeftRadius: '12px' }}>
                 <Box bgcolor={theme.palette.primary.light} height='200px' width='100%' sx={{ borderTopRightRadius: '12px', borderTopLeftRadius: '12px' }}/>
                 <ProfilePicHolder onClick={() => handleButtonClick()}>
-                    <img src={pic} height='100%' width='100%' className='object-fit--cover cursor--pointer border-radius--50'/>
+                    <img src={pic} height='100%' width='100%' loading='lazy' className='object-fit--cover cursor--pointer border-radius--50'/>
                 </ProfilePicHolder>
                 <Box hidden={true}>
                     <input type='file' accept="image/*" name='image' ref={fileInputRef} onChange={handleFileChange}/>
