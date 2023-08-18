@@ -9,12 +9,12 @@ export const HEADER_NAV: NavModel[] = [
         label: 'Visited',
         path: '/visited'
     },
-    {
-        label: 'collections',
-        path: '/collections'
-    },
-    {
-        label: 'Photos',
-        path: '/photos'
-    },
+    // {
+    //     label: 'collections',
+    //     path: '/collections'
+    // },
+    // {
+    //     label: 'Photos',
+    //     path: '/photos'
+    // },
 ]
