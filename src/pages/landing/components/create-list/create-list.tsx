@@ -1,15 +1,16 @@
 import { Box, Chip, Grid, Stack } from '@mui/material';
 import Typography from '../../../../shared/component/typography/typography';
 import Input from '../../../../shared/component/input/input.component';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Button from '../../../../shared/component/button/button.component';
 import { Formik } from 'formik';
-import { useDispatch } from 'react-redux';
-import { postCafeList } from '../../services/landing.slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { postCafeList, selectLoading } from '../../services/landing.slice';
 
 function CreateList(props: { handleClose: () => void }) {
     const [pic, setPic] = useState<string>('');
     const [chips, setChips] = useState<any>([]);
+    const isLoading = useSelector(selectLoading)
     const fileInputRef = useRef<any>(null);
     const dispatch = useDispatch();
     const handleFileChange = (event: any) => {
@@ -38,6 +39,11 @@ function CreateList(props: { handleClose: () => void }) {
     const handleDeleteChip = (chipToDelete: any) => () => {
         setChips((prevChips: any) => prevChips.filter((chip: any) => chip !== chipToDelete));
     };
+    useEffect(() => {
+        if ( isLoading === 'loaded' ) {
+            props.handleClose()
+        }
+    }, [isLoading])
     return(
         <Grid container item py='24px' px='32px'>
             <Box py='12px'>
@@ -78,8 +84,8 @@ function CreateList(props: { handleClose: () => void }) {
                                <Button click={handleButtonClick} variant='outlined' label='Add Cover Image' />
                            </Box>
                            <Grid item container direction='row' gap='12px'>
-                               <Button variant='contained' label='Create' click={handleSubmit}  />
-                               <Button color='error' variant='contained' label='cancel' click={props.handleClose} />
+                               <Button disabled={isLoading === 'pending'} variant='contained' label={ isLoading === 'pending' ? 'Please Wait' : 'Create' } click={handleSubmit}  />
+                               <Button disabled={isLoading === 'pending'} color='error' variant='contained' label='cancel' click={props.handleClose} />
                            </Grid>
                        </Grid>
                    )}
