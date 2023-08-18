@@ -29,7 +29,7 @@ function CafeList(props: any) {
                         </Grid>
                     </Grid>
                     <Grid item container mt='12px' xs={12}>
-                        <Button variant='outlined'  label='Visit' className='width--full'/>
+                        <Button variant='outlined'  label='Details' className='width--full'/>
                     </Grid>
                 </Grid>
             </CafeListCard>
