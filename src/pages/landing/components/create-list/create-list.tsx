@@ -25,14 +25,14 @@ function CreateList() {
                 <Input name='name' />
                 <Input name='name' />
                <Box my='12px'>
-                   <Button variant='outlined' label='Add Cover Image' />
+                   <Button click={handleButtonClick} variant='outlined' label='Add Cover Image' />
                </Box>
                 <Grid item container direction='row'>
                     <Button label='Create' />
                     <Button label='cancel' />
                 </Grid>
                 <Box hidden={true}>
-                    <input type='file' accept="image/*" ref={handleButtonClick} name='image' onChange={handleFileChange}/>
+                    <input type='file' accept="image/*" ref={fileInputRef} name='image' onChange={handleFileChange}/>
                 </Box>
             </Grid>
         </Grid>
