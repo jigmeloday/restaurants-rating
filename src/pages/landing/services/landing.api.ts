@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { db } from '../../../firebase/firebase.config';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 
@@ -48,5 +48,43 @@ export const CreateListAPI = async (data: any) => {
        }
     } catch ( error ) {
         console.log(error)
+    }
+}
+
+export const VisitedCafe = async () => {
+
+    try {
+        const cafeList: any[] = [];
+        const user = query(collection(db, 'restaurants'), where('visited', '==', true));
+        const data = await getDocs(user);
+        data.docs.forEach((doc) => {
+            cafeList.push({
+                id: doc.id,
+                ...doc.data()
+            })
+        });
+        return cafeList;
+    } catch ( error ) {
+        debugger
+        return []
+    }
+}
+
+export const NewCafe = async () => {
+
+    try {
+        const cafeList: any[] = [];
+        const user = query(collection(db, 'restaurants'), where('visited', '==', false));
+        const data = await getDocs(user);
+        data.docs.forEach((doc) => {
+            cafeList.push({
+                id: doc.id,
+                ...doc.data()
+            })
+        });
+        return cafeList;
+    } catch ( error ) {
+        debugger
+        return []
     }
 }

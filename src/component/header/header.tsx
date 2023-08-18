@@ -5,19 +5,25 @@ import Typography from '../../shared/component/typography/typography';
 import { Link, useLocation } from 'react-router-dom';
 import { theme } from '../../assets/theme/theme';
 import Search from '../search/search';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MenuComponent from './components/menu.component';
 import Button from '../../shared/component/button/button.component';
-import { useSelector } from 'react-redux';
-import { selectProfile } from '../../pages/profile/services/profile.slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProfile, selectProfile } from '../../pages/profile/services/profile.slice';
 import { DEFAULT_IMG } from '../../shared/constant/shared.constant';
+import { selectUser } from '../../pages/auth/services/auth.slice';
 
 function Header() {
     const [searchVal, setSearchVal] = useState<string>('');
     const active = useLocation().pathname;
+    const user = useSelector(selectUser);
     const profile = useSelector(selectProfile);
+    const dispatch = useDispatch();
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
+    useEffect(() => {
+        !profile && dispatch(getProfile(user?.email) as keyof unknown)
+    }, [profile]);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
     };
