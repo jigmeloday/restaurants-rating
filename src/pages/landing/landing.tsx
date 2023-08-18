@@ -1,6 +1,5 @@
 import Button from '../../shared/component/button/button.component';
 import { useDispatch, useSelector } from 'react-redux';
-import { userLogOut } from '../auth/services/auth.slice';
 import { getCafeList, selectCafe } from './services/landing.slice';
 import { useEffect, useState } from 'react';
 import { Box, Dialog, Grid } from '@mui/material';
@@ -40,7 +39,7 @@ function Landing() {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <CreateList />
+                <CreateList handleClose={handleClick} />
             </Dialog>
         </Grid>
     )
