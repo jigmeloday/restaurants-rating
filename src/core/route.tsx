@@ -22,7 +22,7 @@ function CoreRoutes() {
         },
         {
             element: <>collection</>,
-            path: '/collections'
+            path: '/new'
         },{
             element: <>photo</>,
             path: '/photos'

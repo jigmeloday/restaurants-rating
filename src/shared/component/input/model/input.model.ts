@@ -14,6 +14,7 @@ export interface InputProps{
     onChange?: any;
     onBlur?: any
     dataCy?: string;
+    keyPress?: any;
     error?: boolean;
     helperText?: string;
     sx?: SxProps<Theme>;

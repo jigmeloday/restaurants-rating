@@ -5,7 +5,7 @@ import { Grid } from '@mui/material';
 export const CafeListCard = styled(Grid)(
     ({theme}) => `
     height: fit-content;
-    width: 274px;
+    width: 260px;
     padding: 32px;
     background: ${theme.palette.white.main};
     border-radius: 8px;

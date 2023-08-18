@@ -19,7 +19,8 @@ function Input (props: InputProps) {
   onChange,
   value, 
   variant,
-  error, 
+  error,
+  keyPress,
   sx,
   helperText,
   required, 
@@ -36,6 +37,7 @@ function Input (props: InputProps) {
    label={label}
    InputProps={InputProps as any}
    type={type}
+   onKeyDown={keyPress}
    value={value}
    onChange={onChange}
    helperText={helperText}
