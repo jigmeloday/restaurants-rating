@@ -5,8 +5,11 @@ import Icon from '../icon/icon';
 import { theme } from '../../../assets/theme/theme';
 import Button from '../button/button.component';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function CafeList(props: any) {
+    console.log(props)
+    const route = useNavigate();
     return (
         <Grid container item>
             <CafeListCard>
@@ -29,7 +32,7 @@ function CafeList(props: any) {
                         </Grid>
                     </Grid>
                     <Grid item container mt='12px' xs={12}>
-                        <Button variant='outlined'  label='Details' className='width--full'/>
+                        <Button variant='outlined' click={() => route(`detail/${props?.item?.id}`)}  label='Details' className='width--full'/>
                     </Grid>
                 </Grid>
             </CafeListCard>
