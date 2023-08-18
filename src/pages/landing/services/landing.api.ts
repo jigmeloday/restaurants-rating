@@ -69,3 +69,22 @@ export const VisitedCafe = async () => {
         return []
     }
 }
+
+export const NewCafe = async () => {
+
+    try {
+        const cafeList: any[] = [];
+        const user = query(collection(db, 'restaurants'), where('visited', '==', false));
+        const data = await getDocs(user);
+        data.docs.forEach((doc) => {
+            cafeList.push({
+                id: doc.id,
+                ...doc.data()
+            })
+        });
+        return cafeList;
+    } catch ( error ) {
+        debugger
+        return []
+    }
+}
