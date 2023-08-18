@@ -6,6 +6,7 @@ import Button from '../../../../shared/component/button/button.component';
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { postCafeList, selectLoading } from '../../services/landing.slice';
+import { CREATE_LIST_SCHEMA } from '../../schema/auth.schema';
 
 function CreateList(props: { handleClose: () => void }) {
     const [pic, setPic] = useState<string>('');
@@ -50,7 +51,9 @@ function CreateList(props: { handleClose: () => void }) {
                 <Typography label='Create List' variant='body1' />
             </Box>
             <Grid item container my='24px'>
-               <Formik initialValues={{ place: '', feedback: '', other: '' }} onSubmit={(values) => {
+               <Formik
+                   validationSchema={CREATE_LIST_SCHEMA}
+                   initialValues={{ place: '', feedback: '', other: '' }} onSubmit={(values) => {
                    createList(values)
                }}>
                    {({ handleSubmit, handleChange, values }) => (
