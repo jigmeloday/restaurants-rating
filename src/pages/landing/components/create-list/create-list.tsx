@@ -6,7 +6,7 @@ import Button from '../../../../shared/component/button/button.component';
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { postCafeList, selectLoading } from '../../services/landing.slice';
-import { CREATE_LIST_SCHEMA } from '../../schema/auth.schema';
+import { CREATE_LIST_SCHEMA } from '../../schema/create-list.schema';
 
 function CreateList(props: { handleClose: () => void }) {
     const [pic, setPic] = useState<string>('');
@@ -56,9 +56,13 @@ function CreateList(props: { handleClose: () => void }) {
                    initialValues={{ place: '', feedback: '', other: '' }} onSubmit={(values) => {
                    createList(values)
                }}>
-                   {({ handleSubmit, handleChange, values }) => (
+                   {({ handleSubmit, handleChange, values, touched, errors }) => (
                        <Grid item container gap='12px'>
-                           <Input name='place' label='Place Name' value={values.place} onChange={handleChange} />
+                           <Input
+                               helperText={ (touched.place &&
+                                   errors.place &&
+                                   errors.place) as string }
+                               name='place' label='Place Name' value={values.place} onChange={handleChange} />
                            <Input name='feedback' label='Feedback/Suggestion' value={values.feedback} onChange={handleChange}/>
                            <Input name='other'
                                   onChange={handleChange}
