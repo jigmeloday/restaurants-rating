@@ -14,6 +14,7 @@ function MenuComponent(props: MenuComponentProps) {
     }
     const onLogOut = () => {
         dispatch(userLogOut() as keyof unknown);
+        route('/');
         props.handleClose();
     }
     return(
