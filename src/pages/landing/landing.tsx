@@ -16,7 +16,7 @@ function Landing() {
     };
 
     useEffect(() => {
-        !cafe.length && dispatch(getCafeList() as any)
+        !cafe?.length && dispatch(getCafeList() as any)
     }, []);
 
     return(
@@ -26,7 +26,7 @@ function Landing() {
             </Grid>
             <Grid item container direction='row' gap='22px' my='24px'>
                 {
-                    cafe.map((item:{ id: string, name: string }) => (
+                    cafe?.map((item:{ id: string, name: string }) => (
                         <Box key={item.id}>
                             <CafeList item={item} />
                         </Box>

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit';
-import { GetCafe } from './landing.api';
+import { CreateListAPI, GetCafe } from './landing.api';
 
 
 export const LANDING_KEY = 'landing';
@@ -19,6 +19,13 @@ export const getCafeList = createAsyncThunk(
     }
 );
 
+export const postCafeList = createAsyncThunk(
+    'landing/postCafeList',
+    async(data:any, thunkAPI) =>{
+        return await CreateListAPI(data);
+    }
+);
+
 export const landingSlice = createSlice({
     name: 'landing',
     initialState: INITIAL_LANDING_STATE,
@@ -28,7 +35,9 @@ export const landingSlice = createSlice({
             .addCase(getCafeList.fulfilled, (state: InitialLandingState, action) => {
                 state.cafe = action.payload;
             })
-
+            .addCase(postCafeList.fulfilled, (state, action) => {
+               state.cafe = action.payload;
+            });
     }
 });
 
