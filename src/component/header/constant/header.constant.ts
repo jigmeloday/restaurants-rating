@@ -6,6 +6,10 @@ export const HEADER_NAV: NavModel[] = [
         path: '/'
     },
     {
+        label: 'New',
+        path: '/new'
+    },
+    {
         label: 'Visited',
         path: '/visited'
     },
