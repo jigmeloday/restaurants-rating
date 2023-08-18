@@ -24,7 +24,7 @@ function Landing() {
             <Grid item container>
                 <Button click={handleClick} label='Create List' variant='contained'/>
             </Grid>
-            <Grid item container direction='row' gap='22px' my='24px' justifyContent='center'>
+            <Grid item container direction='row' gap='18px' my='24px'>
                 {
                     cafe?.map((item:{ id: string, name: string }) => (
                         <Box key={item.id}>
