@@ -2,13 +2,20 @@ import Button from '../../shared/component/button/button.component';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogOut } from '../auth/services/auth.slice';
 import { getCafeList, selectCafe } from './services/landing.slice';
-import { useEffect } from 'react';
-import { Box, Grid } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Box, Dialog, Grid } from '@mui/material';
 import CafeList from '../../shared/component/cafe-list/cafe-list';
+import CreateList from './components/create-list/create-list';
 
 function Landing() {
     const dispatch = useDispatch();
     const cafe = useSelector(selectCafe);
+    const [open, setOpen] = useState(false);
+
+    const handleClick = () => {
+        setOpen(!open);
+    };
+
     useEffect(() => {
         !cafe.length && dispatch(getCafeList() as any)
     }, []);
@@ -16,7 +23,7 @@ function Landing() {
     return(
         <Grid container item padding='34px' >
             <Grid item container>
-                <Button label='Create List' variant='contained'/>
+                <Button click={handleClick} label='Create List' variant='contained'/>
             </Grid>
             <Grid item container direction='row' gap='22px' my='24px'>
                 {
@@ -27,6 +34,14 @@ function Landing() {
                     ))
                 }
             </Grid>
+            <Dialog
+                open={open}
+                onClose={handleClick}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <CreateList />
+            </Dialog>
         </Grid>
     )
 }
