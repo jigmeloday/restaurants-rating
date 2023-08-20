@@ -5,14 +5,18 @@ import { Box, Chip, Grid } from '@mui/material';
 import Typography from '../../shared/component/typography/typography';
 import CafeList from '../../shared/component/cafe-list/cafe-list';
 import Button from '../../shared/component/button/button.component';
-import { UploadCollections } from './services/detail.api';
+import { UpdateVisited, UploadCollections } from './services/detail.api';
+import { useDispatch } from 'react-redux';
+import { getCafeList } from '../landing/services/landing.slice';
 
 function DetailPage() {
     const id = useParams()['id']
     const [detail, setDetail] = useState<any>();
     const [loading, setLoading] = useState(false);
-    const [collections, setCollections] = useState(detail?.collection)
-    const fileInputRef = useRef<any>()
+    const [collections, setCollections] = useState(detail?.collection);
+    const [visited, setVisited] = useState<any>(false);
+    const fileInputRef = useRef<any>();
+    const dispatch = useDispatch();
     useEffect(() => {
         CafeDetailsAPI(id).then((res) => {
             setDetail(res);
@@ -21,6 +25,7 @@ function DetailPage() {
 
     useEffect(() => {
         setCollections(detail?.collection);
+        setVisited(detail?.visited);
     }, [detail]);
     const handleUpload = () => {
         fileInputRef.current?.click();
@@ -37,6 +42,15 @@ function DetailPage() {
         }
     }
 
+    const handleToggle = () => {
+        setLoading(true)
+        UpdateVisited(id).then((res) => {
+            setVisited(res)
+            setLoading(false)
+            dispatch(getCafeList() as keyof unknown);
+        })
+    }
+
     return(
         <Grid container py='24px' px='24px'>
             <Grid item container my='24px'  height='340px'>
@@ -46,6 +60,9 @@ function DetailPage() {
                 <Typography label={detail?.name} variant='body1' />
                 <Typography label={detail?.rating} variant='body1' />
                 <Typography label={detail?.feedback} variant='body1' />
+                <Box my='12px' hidden={visited}>
+                    <Button disabled={loading} click={handleToggle} label='Visited' variant='outlined' />
+                </Box>
                 {
                    detail?.menu.length && detail?.menu?.map((item: string, index: number) => (
                        <Box key={index} my='24px'>

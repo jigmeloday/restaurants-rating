@@ -15,11 +15,24 @@ export const UploadCollections = async (file: any, id:any, collections:[]) => {
                 url
             )
         })
-        const washingtonRef = doc(db, 'restaurants', id);
-        await updateDoc(washingtonRef, {
+        const collectionRef = doc(db, 'restaurants', id);
+        await updateDoc(collectionRef, {
             collection: newArray
         });
         return url;
+    } catch ( error ) {
+        console.log(error)
+    }
+}
+
+export const UpdateVisited = async (id:any) => {
+    try {
+        const resRef = doc(db, 'restaurants', id);
+        await updateDoc(resRef, {
+            visited: true
+        });
+
+        return true;
     } catch ( error ) {
         console.log(error)
     }

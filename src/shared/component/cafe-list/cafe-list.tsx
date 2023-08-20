@@ -8,7 +8,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function CafeList(props: any) {
-    console.log(props)
     const route = useNavigate();
     return (
         <Grid container item>
