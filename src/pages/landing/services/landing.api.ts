@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { addDoc, collection, doc, getDocs, getDoc, query, where } from "firebase/firestore";
 import { db } from '../../../firebase/firebase.config';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 
@@ -85,6 +85,17 @@ export const NewCafe = async () => {
         return cafeList;
     } catch ( error ) {
         debugger
+        return []
+    }
+}
+
+export const CafeDetailsAPI = async (id: any) => {
+
+    try {
+       const cafe = await doc(db, "restaurants", id);
+       const data = await getDoc(cafe);
+       return data.data()
+    } catch ( error ) {
         return []
     }
 }

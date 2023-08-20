@@ -8,6 +8,7 @@ import Auth from '../pages/auth/auth';
 import Profile from '../pages/profile/profile';
 import Visited from '../pages/visited/visited';
 import NewAdded from '../pages/new-added/new-added';
+import DetailPage from '../pages/detail-page/detail-page';
 
 function CoreRoutes() {
     const user = useSelector(selectUser);
@@ -26,8 +27,8 @@ function CoreRoutes() {
             element: <NewAdded/>,
             path: '/new'
         },{
-            element: <>photo</>,
-            path: '/photos'
+            element: <DetailPage/>,
+            path: '/detail/:id'
         },
         {
             element: <Profile />,
