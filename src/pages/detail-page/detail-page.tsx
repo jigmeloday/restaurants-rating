@@ -1,19 +1,40 @@
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { CafeDetailsAPI } from '../landing/services/landing.api';
 import { Box, Chip, Grid } from '@mui/material';
 import Typography from '../../shared/component/typography/typography';
 import CafeList from '../../shared/component/cafe-list/cafe-list';
 import Button from '../../shared/component/button/button.component';
+import { UploadCollections } from './services/detail.api';
 
 function DetailPage() {
     const id = useParams()['id']
     const [detail, setDetail] = useState<any>();
+    const [loading, setLoading] = useState(false);
+    const fileInputRef = useRef<any>()
     useEffect(() => {
         CafeDetailsAPI(id).then((res) => {
             setDetail(res);
         })
     }, []);
+
+    const handleUpload = () => {
+        fileInputRef.current?.click();
+    }
+
+    const handleChange = (event: any) => {
+        const selectedFile = event.target.files[0];
+        if ( selectedFile ) {
+            UploadCollections(selectedFile)
+            // UploadProfile( selectedFile, user?.email ).then( r  => dispatch(setProfile(r)) );
+            // const reader = new FileReader();
+            // reader.onload = () => {
+            //     setPic(reader?.result as any);
+            // };
+            // reader.readAsDataURL(selectedFile);
+        }
+    }
+
     return(
         <Grid container py='24px' px='24px'>
             <Grid item container my='24px'  height='340px'>
@@ -47,7 +68,10 @@ function DetailPage() {
                     }
                 </Grid>
                 <Grid item container mt='24px' justifyContent='center'>
-                    <Button label='Upload Collections' variant='outlined' />
+                    <Button label='Upload Collections' variant='outlined' click={handleUpload}/>
+                    <Box hidden={true}>
+                        <input type='file' ref={fileInputRef}/>
+                    </Box>
                 </Grid>
             </Grid>
         </Grid>
