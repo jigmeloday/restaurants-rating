@@ -14,7 +14,7 @@ function DetailPage() {
     const [detail, setDetail] = useState<any>();
     const [loading, setLoading] = useState(false);
     const [collections, setCollections] = useState(detail?.collection);
-    const [visited, setVisited] = useState<any>(false);
+    const [visited, setVisited] = useState<any>(true);
     const fileInputRef = useRef<any>();
     const dispatch = useDispatch();
     useEffect(() => {
