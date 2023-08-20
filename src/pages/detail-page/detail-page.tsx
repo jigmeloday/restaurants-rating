@@ -11,6 +11,7 @@ function DetailPage() {
     const id = useParams()['id']
     const [detail, setDetail] = useState<any>();
     const [loading, setLoading] = useState(false);
+    const [collections, setCollections] = useState(detail?.collection)
     const fileInputRef = useRef<any>()
     useEffect(() => {
         CafeDetailsAPI(id).then((res) => {
@@ -18,20 +19,21 @@ function DetailPage() {
         })
     }, []);
 
+    useEffect(() => {
+        setCollections(detail?.collection);
+    }, [detail]);
     const handleUpload = () => {
         fileInputRef.current?.click();
     }
 
     const handleChange = (event: any) => {
+        setLoading(true)
         const selectedFile = event.target.files[0];
         if ( selectedFile ) {
-            UploadCollections(selectedFile)
-            // UploadProfile( selectedFile, user?.email ).then( r  => dispatch(setProfile(r)) );
-            // const reader = new FileReader();
-            // reader.onload = () => {
-            //     setPic(reader?.result as any);
-            // };
-            // reader.readAsDataURL(selectedFile);
+            UploadCollections(selectedFile, id, detail.collection).then((res) => {
+                setCollections([...collections, res]);
+                setLoading(false)
+            });
         }
     }
 
@@ -59,8 +61,8 @@ function DetailPage() {
                 <Typography label='Our Collection' variant='body1' fontWeight='700'/>
                 <Grid item container direction='row' gap='14px' pt='24px'>
                     {
-                        detail?.collection?.length &&
-                        detail?.collection?.map((item: any) => (
+                        collections?.length &&
+                        collections?.map((item: any) => (
                             <Box key={item}>
                                 <CafeList item={item}/>
                             </Box>
@@ -68,9 +70,9 @@ function DetailPage() {
                     }
                 </Grid>
                 <Grid item container mt='24px' justifyContent='center'>
-                    <Button label='Upload Collections' variant='outlined' click={handleUpload}/>
+                    <Button disabled={loading} label='Upload Collections' variant='contained' click={handleUpload}/>
                     <Box hidden={true}>
-                        <input type='file' ref={fileInputRef}/>
+                        <input type='file' ref={fileInputRef} onChange={handleChange}/>
                     </Box>
                 </Grid>
             </Grid>
