@@ -5,18 +5,19 @@ import { useEffect, useState } from 'react';
 import { Box, Dialog, Grid } from '@mui/material';
 import CafeList from '../../shared/component/cafe-list/cafe-list';
 import CreateList from './components/create-list/create-list';
+import { selectUser } from '../auth/services/auth.slice';
 
 function Landing() {
     const dispatch = useDispatch();
     const cafe = useSelector(selectCafe);
     const [open, setOpen] = useState(false);
-
+    const user = useSelector(selectUser);
     const handleClick = () => {
         setOpen(!open);
     };
 
     useEffect(() => {
-        !cafe?.length && dispatch(getCafeList() as any)
+        !cafe?.length && dispatch(getCafeList(user.email) as any)
     }, []);
 
     return(

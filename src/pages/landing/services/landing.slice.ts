@@ -20,8 +20,8 @@ export const INITIAL_LANDING_STATE: InitialLandingState = {
 };
 export const getCafeList = createAsyncThunk(
     'landing/getCafeList',
-    async ( _, thunkAPI ) => {
-        return await GetCafe();
+    async ( email:string, thunkAPI ) => {
+        return await GetCafe(email);
     }
 );
 export const visitedList = createAsyncThunk(

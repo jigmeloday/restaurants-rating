@@ -6,8 +6,9 @@ import Typography from '../../shared/component/typography/typography';
 import CafeList from '../../shared/component/cafe-list/cafe-list';
 import Button from '../../shared/component/button/button.component';
 import { UpdateVisited, UploadCollections } from './services/detail.api';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getCafeList } from '../landing/services/landing.slice';
+import { selectUser } from '../auth/services/auth.slice';
 
 function DetailPage() {
     const id = useParams()['id']
@@ -15,6 +16,7 @@ function DetailPage() {
     const [loading, setLoading] = useState(false);
     const [collections, setCollections] = useState(detail?.collection);
     const [visited, setVisited] = useState<any>(true);
+    const user = useSelector(selectUser)
     const fileInputRef = useRef<any>();
     const dispatch = useDispatch();
     useEffect(() => {
@@ -47,7 +49,7 @@ function DetailPage() {
         UpdateVisited(id).then((res) => {
             setVisited(res)
             setLoading(false)
-            dispatch(getCafeList() as keyof unknown);
+            dispatch(getCafeList(user.email) as keyof unknown);
         })
     }
 

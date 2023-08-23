@@ -8,7 +8,7 @@ export const GetProfile = async (email: string) => {
         const data = await getDocs(user);
        return  data?.docs[0]?.data()
     } catch ( error ) {
-        return {}
+        return null
     }
 }
 
