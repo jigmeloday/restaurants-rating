@@ -4,6 +4,8 @@ import { MenuComponentProps } from '../model/header.model';
 import { useDispatch } from 'react-redux';
 import { userLogOut } from '../../../pages/auth/services/auth.slice';
 import { useNavigate } from 'react-router-dom';
+import { setProfile } from '../../../pages/profile/services/profile.action';
+import { setCafe } from '../../../pages/landing/services/landing.action';
 
 function MenuComponent(props: MenuComponentProps) {
     const dispatch = useDispatch();
@@ -14,6 +16,8 @@ function MenuComponent(props: MenuComponentProps) {
     }
     const onLogOut = () => {
         dispatch(userLogOut() as keyof unknown);
+        dispatch(setProfile(null));
+        dispatch(setCafe([]))
         route('/');
         props.handleClose();
     }

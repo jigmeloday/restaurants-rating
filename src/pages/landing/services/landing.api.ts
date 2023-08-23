@@ -2,19 +2,18 @@ import { addDoc, collection, doc, getDocs, getDoc, query, where } from "firebase
 import { db } from '../../../firebase/firebase.config';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 
-export const GetCafe = async () => {
+export const GetCafe = async (email?: string) => {
     try {
+        const cafeList: any[] = [];
         const creatorQuery = query(
             collection(db, 'restaurants'),
-            where('creator', '==', 'jl@selise.ch')
+            where('creator', '==', email)
         );
 
         const sharedQuery = query(
             collection(db, 'restaurants'),
-            where('shared', '==', 'jl@selise.ch')
+            where('shared', '==', email)
         );
-        const cafeList: any[] = [];
-
        return  Promise.all([getDocs(creatorQuery), getDocs(sharedQuery)])
             .then(([creatorDocs, sharedDocs]) => {
                 // Combine the results of both queries
@@ -32,7 +31,6 @@ export const GetCafe = async () => {
             });
 
     } catch ( error ) {
-        debugger
         return []
     }
 }
@@ -63,7 +61,7 @@ export const CreateListAPI = async (data: any) => {
               creator: data.creator,
               shared: data.shared
            });
-           return await GetCafe();
+           return await GetCafe(data.creator);
        }
     } catch ( error ) {
         console.log(error)

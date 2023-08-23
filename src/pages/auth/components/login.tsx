@@ -10,9 +10,7 @@ import { theme } from '../../../assets/theme/theme';
 import { Link } from 'react-router-dom';
 
 function Login() {
-
     const dispatch = useDispatch();
-
     return (
         <Grid item container justifyContent='center'>
             <Formik
