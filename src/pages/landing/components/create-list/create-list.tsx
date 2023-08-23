@@ -31,7 +31,8 @@ function CreateList(props: { handleClose: () => void }) {
             feedback: values.feedback,
             cover: pic,
             menu: chips,
-            creator: user.email
+            creator: user.email,
+            shared: user.shared
         }
         dispatch(postCafeList(data) as keyof unknown)
     }

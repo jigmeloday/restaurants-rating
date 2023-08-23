@@ -60,7 +60,8 @@ export const CreateListAPI = async (data: any) => {
                collection: [],
                feedback: data.feedback,
                visited: false,
-              creator: data.creator
+              creator: data.creator,
+              shared: data.shared
            });
            return await GetCafe();
        }

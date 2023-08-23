@@ -57,33 +57,33 @@ function DetailPage() {
                 <img src={detail?.cover} width='100%' height='100%' className='object-fit--cover border-radius--8'/>
             </Grid>
             <Grid item container my='12px' direction='column'>
-                <Typography label={detail?.name} variant='body1' />
-                <Typography label={detail?.rating} variant='body1' />
-                <Typography label={detail?.feedback} variant='body1' />
+                <Typography label={`Place: ${detail?.name}`} variant='body1' />
+                <Typography label={`Rating: ${detail?.rating}`} variant='body1' />
+                <Typography label={`Feedback: ${detail?.feedback}`} variant='body1' />
                 <Box my='12px' hidden={visited}>
                     <Button disabled={loading} click={handleToggle} label='Visited' variant='outlined' />
                 </Box>
                 {
-                   detail?.menu.length && detail?.menu?.map((item: string, index: number) => (
+                   detail?.menu.length ? detail?.menu?.map((item: string, index: number) => (
                        <Box key={index} my='24px'>
                            <Chip
                                label={item}
                                color="primary"
                            />
                        </Box>
-                    ))
+                    )): null
                 }
             </Grid>
             <Grid item container my='24px' p='18px' boxShadow='rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;'>
                 <Typography label='Our Collection' variant='body1' fontWeight='700'/>
                 <Grid item container direction='row' gap='14px' pt='24px'>
                     {
-                        collections?.length &&
+                        collections?.length ?
                         collections?.map((item: any) => (
                             <Box key={item}>
                                 <CafeList item={item}/>
                             </Box>
-                        ))
+                        )): null
                     }
                 </Grid>
                 <Grid item container mt='24px' justifyContent='center'>
