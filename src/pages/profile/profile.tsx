@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material';
+import { Box, Dialog, Grid } from '@mui/material';
 import { theme } from '../../assets/theme/theme';
 import {  ProfilePicHolder } from '../../shared/style/shared.style';
 import Typography from '../../shared/component/typography/typography';
@@ -10,17 +10,20 @@ import Icon from '../../shared/component/icon/icon';
 import { UploadProfile } from './services/profile.api';
 import { setProfile } from './services/profile.action';
 import { DEFAULT_IMG } from '../../shared/constant/shared.constant';
+import EditProfile from './components/edit-profile';
 
 function Profile() {
     const user = useSelector(selectUser);
     const profile = useSelector(selectProfile);
     const dispatch = useDispatch();
+    const fileInputRef = useRef<any>(null);
+    const [open, setOpen] = useState(false);
     const [pic, setPic] = useState<string>(profile?.profileUrl || DEFAULT_IMG);
+
     useEffect(() => {
         !profile && dispatch(getProfile(user?.email) as keyof unknown)
         profile?.profileUrl && setPic(profile?.profileUrl)
     }, [profile]);
-    const fileInputRef = useRef<any>(null);
 
     const handleButtonClick = () => {
         fileInputRef.current?.click();
@@ -37,6 +40,9 @@ function Profile() {
             reader.readAsDataURL(selectedFile);
         }
     };
+    const handleClick = () => {
+        setOpen(!open);
+    }
     return(
         <Grid container item p='24px' >
             <Grid item container className='position--relative' boxShadow={`${theme.palette.primary.dark} 0px 1px 4px;`} sx={{ borderTopRightRadius: '12px', borderTopLeftRadius: '12px' }}>
@@ -56,10 +62,18 @@ function Profile() {
                         </Box>
                     </Grid>
                     <Grid item container justifyContent='end' xs={4} px='8px' pt='20px'>
-                        <Icon iconName='more_vert' className='cursor--pointer'/>
+                        <Icon iconName='edit' className='cursor--pointer' click={handleClick}/>
                     </Grid>
                 </Grid>
             </Grid>
+            <Dialog
+                open={open}
+                onClose={handleClick}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <EditProfile handleClick={handleClick} />
+            </Dialog>
         </Grid>
     )
 }
