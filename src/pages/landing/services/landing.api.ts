@@ -4,16 +4,33 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 
 export const GetCafe = async () => {
     try {
+        const creatorQuery = query(
+            collection(db, 'restaurants'),
+            where('creator', '==', 'jl@selise.ch')
+        );
+
+        const sharedQuery = query(
+            collection(db, 'restaurants'),
+            where('shared', '==', 'jl@selise.ch')
+        );
         const cafeList: any[] = [];
-        const restaurantsCollection = collection(db, 'restaurants');
-        const querySnapshot = await getDocs(restaurantsCollection);
-        querySnapshot.forEach((doc) => {
-            cafeList.push({
-                id: doc.id,
-                ...doc.data()
+
+       return  Promise.all([getDocs(creatorQuery), getDocs(sharedQuery)])
+            .then(([creatorDocs, sharedDocs]) => {
+                // Combine the results of both queries
+                const combinedDocs = [...creatorDocs.docs, ...sharedDocs.docs];
+                combinedDocs.forEach(doc => {
+                    cafeList.push({
+                        id: doc.id,
+                        ...doc.data()
+                    });
+                });
+               return cafeList;
             })
-        });
-        return cafeList;
+            .catch(error => {
+                console.error('Error fetching documents:', error);
+            });
+
     } catch ( error ) {
         debugger
         return []
@@ -42,7 +59,8 @@ export const CreateListAPI = async (data: any) => {
                menu: data.menu,
                collection: [],
                feedback: data.feedback,
-               visited: false
+               visited: false,
+              creator: data.creator
            });
            return await GetCafe();
        }

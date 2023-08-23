@@ -7,11 +7,13 @@ import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { postCafeList, selectLoading } from '../../services/landing.slice';
 import { CREATE_LIST_SCHEMA } from '../../schema/create-list.schema';
+import { selectUser } from '../../../auth/services/auth.slice';
 
 function CreateList(props: { handleClose: () => void }) {
     const [pic, setPic] = useState<string>('');
     const [chips, setChips] = useState<any>([]);
     const isLoading = useSelector(selectLoading)
+    const user = useSelector(selectUser)
     const fileInputRef = useRef<any>(null);
     const dispatch = useDispatch();
     const handleFileChange = (event: any) => {
@@ -29,6 +31,7 @@ function CreateList(props: { handleClose: () => void }) {
             feedback: values.feedback,
             cover: pic,
             menu: chips,
+            creator: user.email
         }
         dispatch(postCafeList(data) as keyof unknown)
     }
