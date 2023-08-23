@@ -3,7 +3,9 @@ import { db } from '../../../firebase/firebase.config';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 
 export const GetCafe = async () => {
+    debugger
     try {
+        const cafeList: any[] = [];
         const creatorQuery = query(
             collection(db, 'restaurants'),
             where('creator', '==', 'jl@selise.ch')
@@ -13,8 +15,6 @@ export const GetCafe = async () => {
             collection(db, 'restaurants'),
             where('shared', '==', 'jl@selise.ch')
         );
-        const cafeList: any[] = [];
-
        return  Promise.all([getDocs(creatorQuery), getDocs(sharedQuery)])
             .then(([creatorDocs, sharedDocs]) => {
                 // Combine the results of both queries
