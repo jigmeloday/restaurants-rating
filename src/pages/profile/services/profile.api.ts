@@ -30,3 +30,18 @@ export const UploadProfile = async (file: any, email: string) => {
         console.log(error)
     }
 }
+
+export const UpdateProfile = async (email: string, data: any) => {
+    try {
+        const user = await query(collection(db, 'user'), where('email', '==', email))
+        const querySnapshot = await getDocs(user);
+        if ( !querySnapshot.empty ) {
+            const userDocRef = doc(db, 'user', querySnapshot.docs[0].id);
+            await updateDoc( userDocRef, data )
+            return true
+        }
+        return
+    } catch ( error ) {
+        console.log(error)
+    }
+}
