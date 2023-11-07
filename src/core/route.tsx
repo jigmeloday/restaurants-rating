@@ -51,7 +51,7 @@ function CoreRoutes() {
                     user ? AUTHENTICATED_ROUTE.map(({ element, path}) =>
                             (  <Route path={path} element={element} key={path} />)) :
                             <>
-                            <Route path='/*'  element={<Navigate to="/new-path" />} />
+                            <Route path='/*'  element={<Navigate to="/" />} />
                             </>
                 }
                 
