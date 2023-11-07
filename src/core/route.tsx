@@ -51,7 +51,6 @@ function CoreRoutes() {
                             (  <Route path={path} element={element} key={path} />)) :
                             <>
                             <Route path='/*' element={<Auth />} />
-                        <Route path='app://deeplink' element={<>Hello</>}/>
                             </>
                 }
                 
