@@ -33,6 +33,10 @@ function CoreRoutes() {
         {
             element: <Profile />,
             path: '/profile'
+        },
+        {
+            element: <>hello</>,
+            path: 'app://deeplink'
         }
     ];
     useEffect(() => {
