@@ -50,7 +50,7 @@ function CoreRoutes() {
                     user ? AUTHENTICATED_ROUTE.map(({ element, path}) =>
                             (  <Route path={path} element={element} key={path} />)) :
                             <>
-                            <Route path='/hello' element={< >Hello</>} />
+                            <Route path='/app://deeplink' element={< >Hello</>} />
                             <Route path='/*' element={<Auth />} />
                             </>
                 }
