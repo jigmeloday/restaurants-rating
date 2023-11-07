@@ -1,5 +1,6 @@
 import { Suspense, useEffect } from "react";
-import { Route, Routes, useLocation, useNavigate, useRoutes } from "react-router-dom";
+import { Navigate } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Landing from '../pages/landing/landing';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../pages/auth/services/auth.slice';
@@ -50,7 +51,7 @@ function CoreRoutes() {
                     user ? AUTHENTICATED_ROUTE.map(({ element, path}) =>
                             (  <Route path={path} element={element} key={path} />)) :
                             <>
-                            <Route path='/*' element={<Auth />} />
+                            <Route path='/*'  element={<Navigate to="/new-path" />} />
                             </>
                 }
                 
